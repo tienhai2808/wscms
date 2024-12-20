@@ -1,0 +1,8 @@
+.div-nav {
+  justify-content:space-around;
+}
+
+.div-nav span {
+  color: black;
+  font-weight: 700;
+}

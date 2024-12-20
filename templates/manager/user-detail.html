@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1 class="text-center">{{ user.first_name }} {{ user.last_name }}</h1>
+<hr>
+<div class="d-flex justify-content-center">
+  <div style="width: 60%;">
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <th scope="row">Tài khoản</th>
+          <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Họ Tên</th>
+          <td>{{ user.first_name }} {{ user.last_name }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Số điện thoại</th>
+          <td>{{ user.profile.phone_number }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Địa chỉ</th>
+          <td>{{ user.profile.address }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Thành phố</th>
+          <td>{{ user.profile.city }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Tỉnh</th>
+          <td>{{ user.profile.province }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Chức vụ</th>
+          <td>{{ user.profile.permission }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <form method="POST" class="d-flex form-action" style="justify-content: space-around;">
+      {% csrf_token %}
+      <input type="text" hidden name="action">
+      <button type="button" class="btn btn-secondary" value="permission">Thay đổi chức vụ</button>
+      <button type="button" class="btn btn-dark" value="delete">Xóa người dùng</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/manager/user-detail.js' %}"></script>
+{% endblock %}

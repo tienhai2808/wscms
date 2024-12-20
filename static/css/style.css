@@ -1,0 +1,31 @@
+main {
+  min-height: 65vh;
+  position: relative;
+}
+
+.div-message {
+  position: absolute !important;
+  right: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.nav-link {
+  color: white !important;
+}
+
+.title-footer {
+  font-size: 17px;
+  font-weight: 500;
+  color: white;
+  border-bottom: .1px solid white;
+  margin-bottom: 5px;
+  padding-bottom: 2px;
+}
+
+.dropdown-menu {
+  --bs-dropdown-bg: #6c757d !important;
+  --bs-dropdown-link-color: white !important;
+}

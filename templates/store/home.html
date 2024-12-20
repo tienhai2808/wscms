@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/store/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Vật liệu xây dựng</h1>
+<div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://drh.vn/FileUpload/Images/bg15_1.jpg" class="d-block w-100" alt="Ảnh Slide">
+    </div>
+    <div class="carousel-item">
+      <img src="https://cdn.thuvienphapluat.vn/uploads/tintuc/2021/07/31/cong-trinh-xay-dung.jpg" class="d-block w-100" alt="Ảnh Slide">
+    </div>
+    <div class="carousel-item">
+      <img src="https://knl-vn.com/wp-content/uploads/2020/07/1.jpg" class="d-block w-100" alt="Ảnh Slide">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<hr>
+<div class="container">
+  {% for category in categories %}
+  <div class="div-category">
+    <h3 class="text-center">{{ category.name }}</h3>
+    <div class="row justify-content-center">
+      {% for product in category.product_set.all|slice:":3" %}
+      <div class="col-3 m-2 div-product">
+        <img src="{{ product.thumbnail }}" alt="Ảnh sản phẩm">
+      </div>
+      {% endfor %}
+    </div>
+    <center>
+      <a href="/san-pham/{{ category.slug }}/" class="btn btn-outline-secondary">Xem thêm</a>
+    </center>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

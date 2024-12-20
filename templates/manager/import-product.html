@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">{{ title }}</h1>
+<hr>
+<div class="d-flex justify-content-center">
+  <div style="width: 80%;">
+    <div class="d-flex mb-3" style="justify-content: flex-end;">
+      <form class="d-flex justify-content-center gap-3">
+        <div>
+          <label for="select-provider">Nhà cung cấp</label><br>
+          <select id="select-provider" name="provider" class="form-select" style="cursor: pointer;">
+            <option value="">Tất Cả</option>
+            {% for provider in providers %}
+            <option {% if provider.name == req_provider %} selected {% endif %}>{{ provider.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="start-date">Ngày Bắt Đầu</label><br>
+          <input type="date" name="start-date" id="start-date" class="form-control" style="cursor: pointer;" value="{% if start_date %}{{ start_date }}{% endif %}">
+        </div>
+        <div>
+          <label for="end-date">Ngày Kết Thúc</label><br>
+          <input type="date" name="end-date" id="end-date" class="form-control" style="cursor: pointer;" value="{% if end_date %}{{ end_date }}{% endif %}">
+        </div>
+        <button type="submit" class="btn btn-secondary mt-4">Lọc</button>
+      </form>
+    </div>
+    <table class="table table-hover table-bordered">
+      <thead class="table-secondary">
+        <tr>
+          <th scope="col" class="text-center">Mã nhập kho</th>
+          <th scope="col" class="text-center">Thời gian</th>
+          <th scope="col" class="text-center">Người tạo</th>
+          <th scope="col" class="text-center">Nhà cung cấp</th>
+          <th scope="col" class="text-center">Số mặt hàng</th>
+          <th scope="col" class="text-center">Tiền hàng</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for import in imports %}
+        <tr>
+          <td class="text-center"><a href="{{ import.id }}/" style="text-decoration: none;">{{ import.id }}</a></td>
+          <td class="text-center">{{ import.created_date|date:"d/m/Y, H:i" }}</td>
+          <td class="text-center"><a style="text-decoration: none;" href="/quan-ly/nguoi-dung/{{ import.created_by.id }}/">{{ import.created_by }}</a></td>
+          <td class="text-center">{{ import.provider.name }}</td>
+          <td class="text-center">{{ import.importdetail_set.all.count}}</td>
+          <td class="text-center">{{ import.total_amount }}₫</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">{{ title }}</h1>
+<hr> 
+<div class="d-flex justify-content-center">
+  <div class="div-info" style="width: 80%;">
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <th scope="row">Mã xuất kho</th>
+          <td>{{ export.id }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Thời gian đặt hàng</th>
+          <td>{{ export.required_date|date:"d/m/Y, H:i" }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Khách hàng</th>
+          <td>{{ export.customer.first_name }} {{ export.customer.last_name }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Số điện thoại</th>
+          <td>{{ export.customer.profile.phone_number }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Địa chỉ</th>
+          <td>{{ export.customer.profile.address }} - {{ export.customer.profile.city }} - {{ export.customer.profile.province }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Ghi chú từ khách hàng</th>
+          <td>{{ export.customer_note }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Trạng thái</th>
+          <td>{{ export.status }}</td>
+        </tr>
+        {% if export.store_note %}
+        <tr>
+          <th scope="row">Ghi chú từ cửa hàng</th>
+          <td>{{ export.store_note }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Thời gian xuất hàng</th>
+          <td>{{ export.exported_date|date:"d/m/Y, H:i" }}</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+    <br>
+    <h3 class="text-center">Chi tiết đơn hàng</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Sản phẩm</th>
+          <th scope="col">Số lượng</th>
+          <th scope="col">Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ed in export.exportdetail_set.all %}
+        <tr>
+          <td>{{ ed.product.title }}</td>
+          <td>{{ ed.quantity }}</td>
+          <td>{{ ed.total_price }}₫</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <br>
+    <center>
+      <a class="btn btn-secondary" href="/don-hang/">Tất cả đơn hàng</a>
+    </center>
+    <br>
+  </div>
+</div>
+
+{% endblock %}

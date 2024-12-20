@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/warehouse/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Quản lý kho</h1>
+<hr>
+<div class="container d-flex div-nav">
+  <a class="btn btn-secondary" href="/kho/nhap-hang/">Nhập hàng</a>
+  <a class="btn btn-secondary" href="/kho/yeu-cau/">Yêu cầu xuất kho {% if count_export > 0 %}<span>+ {{ count_export }}</span>{% endif %}</a>
+  <a class="btn btn-secondary" href="/kho/san-pham/">Kho hàng {% if count_out_of_stock > 0 %}<span>+ {{ count_out_of_stock }}</span>{% endif %}</a>
+</div>
+{% endblock %}

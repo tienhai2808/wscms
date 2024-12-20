@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">{{ title }}</h1>
+<hr>
+<div class="d-flex justify-content-center">
+  <div style="width: 80%;">
+    <h4 class="text-center">Doanh thu: <a style="text-decoration: none;" href="/kho/yeu-cau/">{{ revenue }}₫</a></h4>
+    <br>
+    <h4 class="text-center">Chi phí: <a style="text-decoration: none;" href="/quan-ly/nhap-hang/">{{ costly }}₫</a></h4>
+    <br>
+    <h4 class="text-center">Lợi nhuận: <a style="text-decoration: none;" href="/quan-ly/san-pham/">{{ profit }}₫</a></h4>
+    <br>
+    <h4 class="text-center">Số lượng nhân viên: <a style="text-decoration: none;" href="/quan-ly/nguoi-dung/">{{ count_emp }} người</a></h4>
+    <br>
+    <h4 class="text-center">Số lượng sản phẩm: <a style="text-decoration: none;" href="/quan-ly/san-pham/">{{ count_pro }} sản phẩm</a></h4>
+    <br>
+    <h4 class="text-center">Số lần nhập hàng: <a style="text-decoration: none;" href="/quan-ly/nhap-hang/">{{ count_import }}</a></h4>
+    <br>
+    <h4 class="text-center">Số đơn hàng: <a style="text-decoration: none;" href="/kho/yeu-cau/">{{ count_order }}</a></h4>
+    <br>
+    <h4 class="text-center">Số lần xuất hàng: <a style="text-decoration: none;" href="/kho/yeu-cau/">{{ count_export }}</a></h4>
+    <br>
+  </div>
+</div>
+
+{% endblock %}

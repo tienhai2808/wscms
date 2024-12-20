@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">{% if not target %}Đăng ký{% else %}Thêm nhân viên{% endif %}</h1>
+<div class="d-flex" style="justify-content: center;">
+  <div style="width: 50%;">
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <center>
+        <button class="btn btn-secondary">{% if not target %}Đăng ký{% else %}Thêm{% endif %}</button>
+      </center>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+{% load static %}
+<script src="{% static 'js/store/sign-up.js' %}"></script>
+{% endblock %}

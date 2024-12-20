@@ -1,0 +1,21 @@
+.carousel-item img {
+  aspect-ratio: 3/1; 
+  overflow: hidden; 
+  object-fit: cover;
+}
+
+.div-product {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.div-category {
+  margin-bottom: 30px;
+}
+
+.div-product img {
+  width: 100%;
+  aspect-ratio: 1/1; 
+  overflow: hidden; 
+  object-fit: cover;
+}

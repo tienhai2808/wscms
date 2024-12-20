@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">{{ title }}</h1>
+<hr>
+<div class="d-flex justify-content-center">
+  <div class="div-info" style="width: 50%;">
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <center>
+        <button class="btn btn-secondary">Thêm mới</button>
+      </center>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

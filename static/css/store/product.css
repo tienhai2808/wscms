@@ -1,0 +1,15 @@
+.product-left img {
+  width: 100%;
+  aspect-ratio: 1/1; 
+  overflow: hidden; 
+  object-fit: cover;
+}
+
+.product-right p {
+  font-size: 20px;
+}
+
+.description {
+  width: 80%;
+  font-size: 18px !important;
+}

@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/warehouse/export-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Yêu cầu xuất kho {{ export.id }}</h1>
+<hr>
+<div class="div-form d-none">
+  <div class="div-close"><i btn-x class="fa-regular fa-circle-xmark"></i></div>
+  <form method="POST">
+    {% csrf_token %}
+    <input hidden name="action" type="text">
+    <label>Ghi chú tới khách hàng:</label>
+    <textarea name="store-note" class="form-control" required></textarea>
+    <center>
+      <button class="btn btn-dark mt-3" type="button">Xác nhận</button>
+    </center>
+  </form>
+</div>
+<div class="d-flex justify-content-center">
+  <div class="div-info">
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <th scope="row">Mã xuất kho</th>
+          <td>{{ export.id }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Thời gian đặt hàng</th>
+          <td>{{ export.required_date|date:"d/m/Y, H:i" }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Khách hàng</th>
+          <td>{{ export.customer.first_name }} {{ export.customer.last_name }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Số điện thoại</th>
+          <td>{{ export.customer.profile.phone_number }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Địa chỉ</th>
+          <td>{{ export.customer.profile.address }} - {{ export.customer.profile.city }} - {{ export.customer.profile.province }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Ghi chú từ khách hàng</th>
+          <td>{{ export.customer_note }}</td>
+        </tr>
+        {% if export.created_by %}
+        <tr>
+          <th scope="row">Nhân viên tạo đơn</th>
+          <td>{{ export.created_by.first_name }} {{ export.created_by.last_name }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+          <th scope="row">Trạng thái</th>
+          <td>{{ export.status }}</td>
+        </tr>
+        {% if export.store_note %}
+        <tr>
+          <th scope="row">Ghi chú từ cửa hàng</th>
+          <td>{{ export.store_note }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Thời gian xuất hàng</th>
+          <td>{{ export.exported_date|date:"d/m/Y, H:i" }}</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+    <br>
+    <h3 class="text-center">Chi tiết yêu cầu</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Sản phẩm</th>
+          <th scope="col">Số lượng</th>
+          <th scope="col">Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ed in export.exportdetail_set.all %}
+        <tr>
+          <td>{{ ed.product.title }}</td>
+          <td>{{ ed.quantity }}</td>
+          <td>{{ ed.total_price }}₫</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <br>
+    {% if export.status == 'Chờ duyệt' %}
+    <div class="div-button">
+      <button value="Đã xuất" class="btn btn-secondary">Xuất kho</button>
+      <button value="Không xuất" class="btn btn-dark">Không xuất</button>
+    </div>
+    <br>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/warehouse/export-detail.js' %}"></script>
+{% endblock %}

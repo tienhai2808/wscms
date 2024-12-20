@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">Đăng nhập</h1>
+<div class="d-flex" style="justify-content: center;">
+  <div style="width: 50%;">
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <center>
+        <p><a href="/dang-ky/">Đăng ký tài khoản</a></p>
+        <button class="btn btn-secondary">Đăng nhập</button>
+      </center>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

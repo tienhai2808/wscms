@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">Yêu cầu xuất kho</h1>
+<hr>
+<div class="d-flex justify-content-center">
+  <div style="width: 80%;">
+    <div class="d-flex mb-3" style="justify-content: flex-end;">
+      <form class="d-flex justify-content-center gap-3">
+        <div>
+          <label for="select-status">Tình trạng</label><br>
+          <select id="select-status" name="status" class="form-select" style="cursor: pointer;">
+            <option value="">Tất Cả</option>
+            <option {% if status == 'Chờ duyệt' %} selected {% endif %}>Chờ duyệt</option>
+            <option {% if status == 'Đã xuất' %} selected {% endif %}>Đã xuất</option>
+            <option {% if status == 'Không xuất' %} selected {% endif %}>Không xuất</option>
+          </select>
+        </div>
+        <div>
+          <label for="start-date">Ngày Bắt Đầu</label><br>
+          <input type="date" name="start-date" id="start-date" class="form-control" style="cursor: pointer;" value="{% if start_date %}{{ start_date }}{% endif %}">
+        </div>
+        <div>
+          <label for="end-date">Ngày Kết Thúc</label><br>
+          <input type="date" name="end-date" id="end-date" class="form-control" style="cursor: pointer;" value="{% if end_date %}{{ end_date }}{% endif %}">
+        </div>
+        <button type="submit" class="btn btn-secondary mt-4">Lọc</button>
+      </form>
+    </div>
+    <table class="table table-hover table-bordered">
+      <thead class="table-secondary">
+        <tr>
+          <th scope="col" class="text-center">Mã xuất kho</th>
+          <th scope="col" class="text-center">Thời gian</th>
+          <th scope="col" class="text-center">Thời gian xuất</th>
+          <th scope="col" class="text-center">Khách hàng</th>
+          <th scope="col" class="text-center">Số mặt hàng</th>
+          <th scope="col" class="text-center">Tiền hàng</th>
+          <th scope="col" class="text-center">Trạng thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for export in exports %}
+        <tr>
+          <td class="text-center"><a href="/kho/yeu-cau/{{ export.id }}/" style="text-decoration: none;">{{ export.id }}</a></td>
+          <td class="text-center">{{ export.required_date|date:"d/m/Y, H:i" }}</td>
+          <td class="text-center">{{ export.exported_date|date:"d/m/Y, H:i" }}</td>
+          <td class="text-center">{{ export.customer.first_name }} {{ export.customer.last_name }}</td>
+          <td class="text-center">{{ export.exportdetail_set.all.count }}</td>
+          <td class="text-center">{{ export.total_amount }}₫</td>
+          <td class="text-center">{{ export.status }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

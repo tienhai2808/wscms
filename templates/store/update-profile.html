@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">Sửa hồ sơ</h1>
+<div class="d-flex" style="justify-content: center;">
+  <div style="width: 50%;">
+    <form method="POST">
+      {% csrf_token %}
+      {{ form_u.as_p }}
+      {{ form_p.as_p }}
+      <center>
+        <button class="btn btn-secondary">Lưu</button>
+      </center>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

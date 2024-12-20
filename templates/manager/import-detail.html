@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">{{ title }}</h1>
+<hr>
+<div class="d-flex justify-content-center">
+  <div class="div-info" style="width: 80%;">
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <th scope="row">Mã nhập kho</th>
+          <td>{{ import.id }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Thời gian nhập kho</th>
+          <td>{{ import.created_date|date:"d/m/Y, H:i" }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Người nhập</th>
+          <td>{{ import.created_by.first_name }} {{ import.created_by.last_name }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Nhà cung cấp</th>
+          <td>{{ import.provider.name }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Ghi chú</th>
+          <td>{{ import.note }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <h3 class="text-center">Chi tiết nhập hàng</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Sản phẩm</th>
+          <th scope="col">Số lượng</th>
+          <th scope="col">Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for id in import.importdetail_set.all %}
+        <tr>
+          <td>{{ id.product.title }}</td>
+          <td>{{ id.quantity }}</td>
+          <td>{{ id.total_price }}₫</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <br>
+    <center>
+      <a class="btn btn-secondary" href="/quan-ly/nhap-hang/">Quản lý nhập hàng</a>
+    </center>
+    <br>
+  </div>
+</div>
+
+{% endblock %}

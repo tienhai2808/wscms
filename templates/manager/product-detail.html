@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">{{ title }}</h1>
+<hr>
+<div class="d-flex justify-content-center">
+  <div class="div-info" style="width: 80%;">
+    <p class="text-center" style="font-size: 18px;">Mã sản phẩm {{ product.id }}</p>
+    <p class="text-center" style="font-size: 18px;">Dòng sản phẩm: {{ product.category }}</p>
+    <div class="text-center" style="font-size: 18px;">Hình ảnh:</div>
+    <center><img width="30%" class="mb-3" src="{{ product.thumbnail }}" alt="Ảnh sản phẩm"></center>
+    <p class="text-center" style="font-size: 18px;">Giá nhập: {{ product.price_import }}₫</p>
+    <p class="text-center" style="font-size: 18px;">Giá bán: {{ product.price_export }}₫</p>
+    <p class="text-center" style="font-size: 18px;">Số lượng đã nhập: {{ product.stock.quantity }}</p>
+    <p class="text-center" style="font-size: 18px;">Số lượng đã bán: {{ product.stock.purchased }}</p>
+    <p class="text-center" style="font-size: 18px;">Số lượng tồn kho: {{ product.stock.inventory }}</p>
+    <p class="text-center" style="font-size: 18px;">Tình trạng: 
+      {% if product.stock.out_of_stock == True %}
+      Hết hàng
+      {% else %}
+      Còn hàng
+      {% endif %}
+    </p>
+    <br>
+    <div class="d-flex justify-content-center gap-4">
+      <a class="btn btn-secondary" href="/quan-ly/san-pham/chinh-sua/{{product.id}}/">Sửa sản phẩm</a>
+      <form method="POST" class="form-delete">
+        {% csrf_token %}
+        <button type="button" class="btn btn-dark">Xóa sản phẩm</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+{% load static %}
+<script src="{% static 'js/manager/product-detail.js' %}"></script>
+{% endblock %}

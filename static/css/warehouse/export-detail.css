@@ -1,0 +1,30 @@
+.div-info {
+  width: 80%;
+}
+
+.div-info p {
+  font-size: 18px;
+  text-align: center;
+}
+
+.div-button {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.div-form {
+  position: absolute;
+  right: 25%;
+  top: 25%;
+  width: 50%;
+  background-color: rgba(108,117,125,1);
+  padding: 20px;
+}
+
+.div-close {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}

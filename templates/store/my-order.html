@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">Đơn hàng của bạn</h1>
+<hr>
+<div class="d-flex justify-content-center">
+  <div style="width: 80%;">
+    {% if exports %}
+    <table class="table table-hover table-bordered">
+      <thead class="table-secondary">
+        <tr>
+          <th scope="col" class="text-center">Mã xuất hàng</th>
+          <th scope="col" class="text-center">Thời gian đặt</th>
+          <th scope="col" class="text-center">Thời gian xuất</th>
+          <th scope="col" class="text-center">Tiền hàng</th>
+          <th scope="col" class="text-center">Trạng thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for export in exports %}
+        <tr>
+          <td class="text-center"><a href="/don-hang/{{ export.id }}/" style="text-decoration: none;">{{ export.id }}</a></td>
+          <td class="text-center">{{ export.required_date|date:"d/m/Y, H:i" }}</td>
+          <td class="text-center">{{ export.exported_date|date:"d/m/Y, H:i" }}</td>
+          <td class="text-center">{{ export.total_amount }}₫</td>
+          <td class="text-center">{{ export.status }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <h4 class="text-center">Chưa có đơn hàng nào</h4>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

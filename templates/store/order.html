@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/store/order.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Đặt hàng</h1>
+<hr>
+<div class="d-flex justify-content-center">
+  <form style="width: 60%;" method="POST">
+    {% csrf_token %}
+    <h4 class="text-center">Thông tin đơn hàng</h4>
+    {{ form_a.as_p }}
+    {{ form_e.as_p }}
+    <h4 class="text-center">Thông tin chi tiết đơn hàng</h4>
+    <div class="import-detail">
+      {{ form_ed.as_p }}
+    </div>
+    <center>
+      <button add-product class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-plus"></i> Thêm sản phẩm</button>
+    </center>
+    <br>
+    <center>
+      <button submit-form class="btn btn-secondary">Xác nhận</button>
+    </center>
+  </form>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/store/order.js' %}"></script>
+{% endblock %}

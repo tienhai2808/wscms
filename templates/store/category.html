@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/store/category.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">{{ title }}</h1>
+<div class="container">
+  <div class="row justify-content-center">
+    {% for product in products%}
+    <div class="col-3 div-product">
+      <img src="{{ product.thumbnail }}" alt="Ảnh sản phẩm">
+      <div class="product-body">
+        <h5 class="text-center link-product" ><a href="/{{ product.category.slug }}/{{ product.slug }}/">{{ product.title }}</a></h5>
+        <center>
+          <span class="text-center">{{ product.price_export }}₫</span>
+        </center>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
